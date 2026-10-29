@@ -1,55 +1,62 @@
 # CutiPintar MY 🌴
 
-Rehat lebih lama dengan cuti tahunan yang ada. Aplikasi web sumber terbuka untuk Malaysia, tanpa akaun atau pelayan data.
+Enjoy longer breaks with the annual leave you have. An open-source leave planner for Malaysia, with no account or backend required.
 
-## Jalankan
+## Getting started
 
-Perlu Python 3 untuk pratonton; Node.js 20+ untuk ujian.
+You need Python 3 for the local preview and Node.js 20+ to run the tests.
 
 ```sh
 python3 -m http.server 4173
-# buka http://localhost:4173
+# Open http://localhost:4173
 node --test
 ```
 
-Atau `npm run dev` dan `npm test`. Tiada pemasangan pakej diperlukan. Jangan buka index.html terus melalui file:// kerana aplikasi memuat JSON menggunakan fetch.
+Alternatively, use `npm run dev` and `npm test`. No package installation is required. Serve the project over HTTP: opening index.html through file:// will prevent the JSON dataset from loading.
 
 ## MVP v0.1
 
-- Semua 13 negeri dan 3 wilayah persekutuan; jadual asas 2026 disertakan.
-- Pilihan tahun tersedia berdasarkan dataset yang dimuatkan. Import JSON menambah tahun lain; tarikh tahun lain tidak diteka.
-- Bajet 0–60 hari; tarikh mula carian; hujung minggu Sabtu–Ahad atau Jumaat–Sabtu boleh ditukar mengikut jadual kerja sendiri.
-- Enam cadangan alternatif tanpa pertindihan, setiap satu dalam bajet penuh yang dimasukkan.
-- Tarikh permohonan cuti diperincikan. Eksport `.ics` mengandungi **cuti tahunan sahaja**, sebagai acara sehari penuh berstatus cadangan, untuk Google Calendar / Outlook / Apple Calendar.
-- Import JSON tempatan disahkan; data hanya kekal dalam sesi pelayar. Refresh memulihkan data asal.
+- All 13 states and 3 federal territories, with the base 2026 holiday schedule included.
+- Select from loaded years. Import JSON to add another year; dates for unsupported years are never guessed.
+- A leave budget of 0–60 days, a search start date, and a Saturday–Sunday or Friday–Saturday weekend to match your work schedule.
+- Up to six non-overlapping alternatives, each using the full leave budget independently.
+- Exact dates to apply for annual leave. Export `.ics` files containing **annual leave days only**, as tentative all-day events for Google Calendar, Outlook or Apple Calendar.
+- Validated local JSON imports. Imported data lasts for the current browser session; refreshing restores the bundled dataset.
+- English interface, documentation, validation messages and calendar exports. Malaysian place names and official holiday names are retained in their original form.
 
-## Pelan dan seni bina
+## MVP plan and architecture
 
-1. MVP: input → tapis cuti negeri → tandakan hari bukan bekerja → cari rehat berterusan → susun → eksport.
-2. Seterusnya: dataset 2027 disemak, cuti gantian dan pindaan dengan bukti sumber setiap rekod, ujian pelayar automatik.
-3. Kemudian: gabungan beberapa perjalanan menggunakan satu bajet tahunan (dynamic programming), simpan pilihan dan kalendar bulanan.
+1. Current MVP: collect preferences → filter state holidays → identify non-working days → find continuous breaks → rank alternatives → export.
+2. Next: a reviewed 2027 dataset, confirmed substitute holidays and amendments with evidence per record, and automated browser tests.
+3. Later: multiple trips sharing one annual leave budget using dynamic programming, saved preferences, and a monthly calendar view.
 
-Frontend statik ES modules, pengiraan tulen dalam `src/planner.js`, data berversi dalam `data/`. Tiada backend diperlukan. Boleh dihoskan dengan GitHub Pages daripada akar repo atau mana-mana pelayan statik. Google Fonts adalah pilihan visual sahaja; fon sistem menjadi fallback.
+The app is a static frontend using ES modules. Pure planning functions live in `src/planner.js`; versioned holiday data lives in `data/`. No backend is needed. Host the repository root on GitHub Pages or any static server. Google Fonts are optional; system fonts provide a fallback.
 
 ```text
-index.html / style.css       Antara muka responsif Bahasa Melayu
-src/app.js                  Interaksi, import, muat turun
-src/planner.js              Pengiraan dan eksport ICS
-src/states.js               Kod negeri
- data/2026.json             Snapshot jadual asas rasmi
- tests/planner.test.js      Ujian Node terbina dalam
- docs/DATA.md               Sumber, batasan dan kemas kini
- .github/workflows/test.yml CI ujian
+index.html / style.css      Responsive English interface
+src/app.js                  UI interactions, imports and downloads
+src/planner.js              Planning logic and ICS export
+src/states.js               Malaysian state codes and names
+data/2026.json              Official base-schedule snapshot
+tests/planner.test.js       Built-in Node tests
+docs/DATA.md                Sources, limitations and maintenance
+.github/workflows/test.yml  Automated tests on GitHub
 ```
 
-## Cara pengiraan
+## How planning works
 
-Semua selang dalam tahun dipertimbangkan. Kos = bilangan hari bekerja yang bukan cuti umum; hanya selang dalam bajet diterima. Susunan: hari rehat terbanyak, cuti tahunan paling sedikit, tarikh paling awal. Selepas pilihan pertama, kad alternatif dipilih tanpa bertindih. Masa O(D² log D) termasuk sorting, D ≤ 366; sesuai di pelayar. Pilihan pertama ialah optimum untuk **satu tempoh rehat berterusan**. Kad lain bukan pelan pembahagian bajet tahunan. Pengiraan tidak merentasi sempadan tahun.
+Every interval within the selected year is considered. Its cost is the number of working days that are not public holidays. Intervals within the leave budget are ranked by the most days off, then the fewest annual leave days, then the earliest date. After the best result, alternatives are selected without overlap.
 
-## Status data — baca dahulu
+Including sorting, runtime is O(D² log D), where D ≤ 366. The first result is optimal for **one continuous break**. Other cards are alternatives, not a plan that divides a shared annual budget. Planning does not cross year boundaries.
 
-Data 2026 ialah **jadual asas**, bukan kalendar terkini yang lengkap. Tidak menjana cuti gantian automatik. Cuti khas, pengumuman baharu, pertindihan perayaan dan polisi majikan boleh mengubah hasil. Antaranya, BKPP telah menerbitkan pindaan / warta tambahan 2026 yang belum digabungkan dalam snapshot ini. Semak dengan sumber rasmi dan majikan, kemudian import dataset disemak yang mengandungi tarikh gantian sebenar. Lihat [sumber dan proses](docs/DATA.md).
+## Data status — please read
 
-## Sumbangan dan lesen
+The bundled 2026 dataset is a **base schedule**, not a complete, current holiday calendar. Substitute holidays are not generated automatically. Special holidays, new announcements, overlapping celebrations and employer policies can change the results. BKPP has published additional 2026 notices and gazettes that are not yet incorporated in this snapshot.
 
-Lihat [CONTRIBUTING.md](CONTRIBUTING.md). Kod di bawah MIT; jadual fakta cuti ditranskripsi daripada sumber kerajaan dengan atribusi, tanpa menyalin PDF atau logo. Tiada hubungan rasmi dengan kerajaan. Repo GitHub: https://github.com/spymasterzul-png/CutiPintarMY.
+Check official sources and your employer’s calendar, then import a reviewed dataset containing confirmed substitute dates. See [data sources and maintenance](docs/DATA.md).
+
+## Contributing and license
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Code is licensed under MIT. Holiday facts are transcribed from government sources with attribution; government PDFs and logos are not reproduced. This is an independent project, not an official government service.
+
+Repository: https://github.com/spymasterzul-png/CutiPintarMY

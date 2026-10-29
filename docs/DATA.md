@@ -1,24 +1,27 @@
-# Data cuti
+# Holiday data
 
-Sumber utama: [Jadual BKPP JPM 2026](https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf), halaman 1–3. Metadata semakan: 29 Oktober 2026. Snapshot ini mengekalkan jadual asas dan bukan pengesahan bahawa semua pindaan telah digabungkan.
+Primary source: [BKPP JPM 2026 schedule](https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf), pages 1–3. Source review metadata: 29 October 2026. This snapshot preserves the base schedule; that date does not certify that every amendment has been incorporated. Official holiday names are retained in their original form.
 
-Rujukan kemas kini:
-- [Indeks Hari Kelepasan Am BKPP](https://www.kabinet.gov.my/hari-kelepasan-am/) — jadual tahun berikutnya.
-- [Akta dan Warta BKPP](https://www.kabinet.gov.my/akta-dan-warta/) — pindaan dan hari tambahan.
-- [Warta tambahan Raya 2026](https://www.kabinet.gov.my/storage/2026/03/PUB-111_2026.pdf) — pengisytiharan bersyarat; belum dimasukkan.
-- [Portal rasmi Johor](https://www.johor.gov.my/rakyat/cuti-umum-2) — semakan silang negeri.
-- [Portal rasmi Kelantan](https://administration.kelantan.gov.my/index.php/rakyat/penerbitan/takwim-cuti/takwim-cuti-2026) — semakan silang negeri.
+## Update sources
 
-BKPP turut mengumumkan 2 Jun 2026 sebagai gantian Wesak bagi negeri yang menetapkan Ahad sebagai hari kelepasan mingguan. Snapshot tidak menganggap aturan gantian seragam bagi semua negeri atau majikan. Sabah dan Sarawak serta cuti bertindih perlu disemak berasingan.
+- [BKPP public holiday index](https://www.kabinet.gov.my/hari-kelepasan-am/) — schedules for other years.
+- [BKPP acts and gazettes](https://www.kabinet.gov.my/akta-dan-warta/) — amendments and additional holidays.
+- [Additional Raya holiday gazette, 2026](https://www.kabinet.gov.my/storage/2026/03/PUB-111_2026.pdf) — a conditional declaration, not yet included.
+- [Official Johor portal](https://www.johor.gov.my/rakyat/cuti-umum-2) — state cross-checks.
+- [Official Kelantan portal](https://administration.kelantan.gov.my/index.php/rakyat/penerbitan/takwim-cuti/takwim-cuti-2026) — state cross-checks.
 
-## Kontrak import
+BKPP also announced 2 June 2026 as a substitute Wesak holiday for states observing Sunday as their weekly holiday. The snapshot does not assume a uniform substitute-holiday rule for every state or employer. Sabah, Sarawak and overlapping holidays require separate review.
+
+## Import format
 
 ```json
-{"year":2027,"status":"Data pengguna — belum disahkan","holidays":[{"date":"2027-01-01","name":"Tahun Baharu","states":["SGR"]}]}
+{"year":2027,"status":"User data — unverified","holidays":[{"date":"2027-01-01","name":"Tahun Baharu","states":["SGR"]}]}
 ```
 
-Contoh di atas menerangkan format sahaja, bukan dataset lengkap. Kod negeri ada dalam `src/states.js`. Tarikh ISO mesti sah dan dalam tahun yang sama. Satu rekod boleh meliputi beberapa negeri; beberapa nama pada tarikh sama tidak menambah kos atau hari rehat. Jangan masukkan hari hujung minggu sebagai cuti gantian tanpa bukti.
+This example illustrates the format only; it is not a complete dataset. State codes are defined in `src/states.js`. ISO dates must be valid and fall within the declared year. One record can cover multiple states. Multiple holiday names on the same date do not increase the number of days off or the leave cost. Do not assume a weekend holiday creates a substitute day without evidence.
 
-## Proses penyelenggaraan
+## Maintenance process
 
-Transkripsi jadual → semak setiap tanda negeri dan tarikh → semak warta/pindaan → tambah gantian yang disahkan → rekod URL, tarikh semakan dan skop liputan → jalankan ujian → semakan manusia melalui PR. Untuk v0.2, tambah provenance per rekod dan status kelengkapan sebelum memaparkan dataset sebagai lengkap. Jangan menyalin jadual tahun lepas atau menjangka tarikh perayaan bergerak.
+Transcribe the schedule → verify each state marker and date → review gazettes and amendments → add confirmed substitute dates → record source URLs, review dates and coverage → run tests → request human review through a pull request.
+
+For v0.2, add provenance per record and a completeness status before marking a dataset as complete. Do not copy the previous year’s schedule or predict dates for movable celebrations.
