@@ -1,0 +1,1 @@
+export const states = {"KUL": "Kuala Lumpur", "LBN": "Labuan", "PJY": "Putrajaya", "JHR": "Johor", "KDH": "Kedah", "KTN": "Kelantan", "MLK": "Melaka", "NSN": "Negeri Sembilan", "PHG": "Pahang", "PRK": "Perak", "PLS": "Perlis", "PNG": "Pulau Pinang", "SBH": "Sabah", "SWK": "Sarawak", "SGR": "Selangor", "TRG": "Terengganu"};

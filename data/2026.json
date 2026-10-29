@@ -1,0 +1,598 @@
+{
+  "year": 2026,
+  "status": "Jadual asas — belum termasuk semua cuti tambahan / gantian",
+  "source": "https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf",
+  "checked": "2026-10-29",
+  "holidays": [
+    {
+      "date": "2026-02-17",
+      "name": "Tahun Baharu Cina",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-02-18",
+      "name": "Tahun Baharu Cina (Hari Kedua)",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Puasa",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-03-22",
+      "name": "Hari Raya Puasa (Hari Kedua)",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Pekerja",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Hari Raya Qurban",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Hari Wesak",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Keputeraan Agong",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-06-17",
+      "name": "Awal Muharam",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Maulidur Rasul",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-08-31",
+      "name": "Hari Kebangsaan",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "name": "Hari Malaysia",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Krismas",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-11-08",
+      "name": "Deepavali",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "JHR",
+        "KDH",
+        "KTN",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SBH",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baharu",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "MLK",
+        "NSN",
+        "PHG",
+        "PRK",
+        "PNG",
+        "SBH",
+        "SWK",
+        "SGR"
+      ]
+    },
+    {
+      "date": "2026-01-14",
+      "name": "Hari Keputeraan Yang di-Pertuan Besar",
+      "states": [
+        "NSN"
+      ]
+    },
+    {
+      "date": "2026-01-17",
+      "name": "Israk dan Mikraj",
+      "states": [
+        "KDH",
+        "NSN",
+        "PLS",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-02-01",
+      "name": "Thaipusam",
+      "states": [
+        "KUL",
+        "PJY",
+        "JHR",
+        "NSN",
+        "PRK",
+        "PNG",
+        "SGR"
+      ]
+    },
+    {
+      "date": "2026-02-01",
+      "name": "Hari Wilayah Persekutuan",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY"
+      ]
+    },
+    {
+      "date": "2026-02-19",
+      "name": "Awal Ramadan",
+      "states": [
+        "JHR",
+        "KDH"
+      ]
+    },
+    {
+      "date": "2026-02-20",
+      "name": "Hari Pengisytiharan Tarikh Kemerdekaan",
+      "states": [
+        "MLK"
+      ]
+    },
+    {
+      "date": "2026-03-04",
+      "name": "Hari Pertabalan Sultan Terengganu",
+      "states": [
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-03-07",
+      "name": "Nuzul Al-Quran",
+      "states": [
+        "KUL",
+        "LBN",
+        "PJY",
+        "KTN",
+        "PHG",
+        "PRK",
+        "PLS",
+        "PNG",
+        "SGR",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-03-23",
+      "name": "Hari Keputeraan Sultan Johor",
+      "states": [
+        "JHR"
+      ]
+    },
+    {
+      "date": "2026-03-23",
+      "name": "Hari Raya Puasa (Hari Ketiga)",
+      "states": [
+        "MLK"
+      ]
+    },
+    {
+      "date": "2026-03-30",
+      "name": "Hari Jadi Yang di-Pertua Negeri Sabah",
+      "states": [
+        "SBH"
+      ]
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "states": [
+        "SBH",
+        "SWK"
+      ]
+    },
+    {
+      "date": "2026-04-26",
+      "name": "Hari Keputeraan Sultan Terengganu",
+      "states": [
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-05-17",
+      "name": "Hari Keputeraan Raja Perlis",
+      "states": [
+        "PLS"
+      ]
+    },
+    {
+      "date": "2026-05-22",
+      "name": "Hari Hol Sultan Ahmad Shah",
+      "states": [
+        "PHG"
+      ]
+    },
+    {
+      "date": "2026-05-26",
+      "name": "Hari Arafah",
+      "states": [
+        "KTN",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Hari Raya Qurban (Hari Kedua)",
+      "states": [
+        "KDH",
+        "KTN",
+        "PLS",
+        "TRG"
+      ]
+    },
+    {
+      "date": "2026-05-30",
+      "name": "Pesta Kaamatan",
+      "states": [
+        "LBN",
+        "SBH"
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Pesta Kaamatan (Hari Kedua)",
+      "states": [
+        "LBN",
+        "SBH"
+      ]
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Gawai Dayak",
+      "states": [
+        "SWK"
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "name": "Gawai Dayak (Hari Kedua)",
+      "states": [
+        "SWK"
+      ]
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Hari Keputeraan Sultan Kedah",
+      "states": [
+        "KDH"
+      ]
+    },
+    {
+      "date": "2026-07-07",
+      "name": "Hari Warisan Dunia George Town",
+      "states": [
+        "PNG"
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "name": "Hari Jadi Yang di-Pertua Negeri Pulau Pinang",
+      "states": [
+        "PNG"
+      ]
+    },
+    {
+      "date": "2026-07-21",
+      "name": "Hari Hol Sultan Iskandar",
+      "states": [
+        "JHR"
+      ]
+    },
+    {
+      "date": "2026-07-22",
+      "name": "Hari Sarawak",
+      "states": [
+        "SWK"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "name": "Hari Keputeraan Sultan Pahang",
+      "states": [
+        "PHG"
+      ]
+    },
+    {
+      "date": "2026-08-24",
+      "name": "Hari Jadi Yang di-Pertua Negeri Melaka",
+      "states": [
+        "MLK"
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "name": "Hari Keputeraan Sultan Kelantan",
+      "states": [
+        "KTN"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "name": "Hari Keputeraan Sultan Kelantan (Hari Kedua)",
+      "states": [
+        "KTN"
+      ]
+    },
+    {
+      "date": "2026-10-10",
+      "name": "Hari Jadi Yang di-Pertua Negeri Sarawak",
+      "states": [
+        "SWK"
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "name": "Hari Keputeraan Sultan Perak",
+      "states": [
+        "PRK"
+      ]
+    },
+    {
+      "date": "2026-12-11",
+      "name": "Hari Keputeraan Sultan Selangor",
+      "states": [
+        "SGR"
+      ]
+    },
+    {
+      "date": "2026-12-24",
+      "name": "Christmas Eve",
+      "states": [
+        "SBH"
+      ]
+    }
+  ]
+}

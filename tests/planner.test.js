@@ -1,0 +1,16 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {plan,calendar,validate,next} from '../src/planner.js';
+import {states} from '../src/states.js';
+const data=JSON.parse(await readFile(new URL('../data/2026.json',import.meta.url)));
+const opts={year:2026,holidays:[],state:'SGR',budget:1};
+test('dataset valid and covers all 16 states',()=>{validate(data,states);for(const s of Object.keys(states))assert.ok(data.holidays.some(h=>h.states.includes(s)));});
+test('one Friday or Monday joins a weekend',()=>{const [r]=plan(opts);assert.equal(r.total,3);assert.equal(r.leave.length,1);});
+test('zero budget and overlapping holidays never consume leave',()=>{const h={date:'2026-01-01',name:'A',states:['SGR']};const [r]=plan({...opts,budget:0,holidays:[h,h]});assert.equal(r.total,2);assert.equal(r.leave.length,0);});
+test('state-only holiday excluded elsewhere',()=>{const h={date:'2026-01-02',states:['SGR']};assert.equal(plan({...opts,holidays:[h],budget:0})[0].total,3);assert.equal(plan({...opts,state:'JHR',holidays:[h],budget:0})[0].total,2);});
+test('Friday Saturday weekend and lower bound',()=>{const r=plan({...opts,budget:0,weekend:[5,6],from:'2026-12-25'})[0];assert.equal(r.start,'2026-12-25');assert.equal(r.end,'2026-12-26');});
+test('results respect budget, boundaries and do not overlap',()=>{const rs=plan({...opts,holidays:data.holidays,budget:5});for(const r of rs){assert.ok(r.leave.length<=5);assert.ok(r.start>='2026-01-01'&&r.end<='2026-12-31');}for(let i=0;i<rs.length;i++)for(let j=i+1;j<rs.length;j++)assert.ok(rs[i].end<rs[j].start||rs[j].end<rs[i].start);});
+test('invalid budgets and invalid imported dates rejected',()=>{for(const budget of [-1,1.2,NaN,61])assert.throws(()=>plan({...opts,budget}));assert.throws(()=>validate({year:2026,holidays:[{date:'2026-02-30',name:'bad',states:['SGR']}]},states));assert.throws(()=>validate({year:2026,holidays:[{date:'2026-01-01',name:'bad',states:['XYZ']}]},states));});
+test('leap years and exclusive ICS end dates',()=>{assert.equal(next('2028-02-28'),'2028-02-29');assert.equal(next('2026-12-31'),'2027-01-01');const text=calendar({leave:['2026-12-31']},'SGR');assert.match(text,/DTEND;VALUE=DATE:20270101/);assert.match(text,/STATUS:TENTATIVE/);assert.ok(text.endsWith('END:VCALENDAR\r\n'));assert.equal(text.split('BEGIN:VEVENT').length-1,1);});
+test('exact optimal length matches independent sliding-window oracle',()=>{for(const state of ['SGR','KTN','SWK'])for(const budget of [0,1,3,8]){const hs=new Set(data.holidays.filter(h=>h.states.includes(state)).map(h=>h.date));const days=[];for(let d='2026-01-01';d<='2026-12-31';d=next(d))days.push(hs.has(d)||[0,6].includes(new Date(d).getUTCDay())?0:1);let left=0,cost=0,best=0;days.forEach((v,right)=>{cost+=v;while(cost>budget)cost-=days[left++];best=Math.max(best,right-left+1);});assert.equal(plan({...opts,state,budget,holidays:data.holidays})[0].total,best);}});
