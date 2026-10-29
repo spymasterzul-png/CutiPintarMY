@@ -35,3 +35,7 @@ This example illustrates the format only; it is not a complete dataset. State co
 Transcribe the schedule → verify each state marker and date → review gazettes and amendments → add confirmed substitute dates → record source URLs, review dates and coverage → run tests → request human review through a pull request.
 
 For v0.2, add provenance per record and a completeness status before marking a dataset as complete. Do not copy the previous year’s schedule or predict dates for movable celebrations.
+
+## Runtime substitution layer
+
+The base JSON files still contain original schedule dates, not generated replacements. The interface now runs `observedHolidays` before displaying or planning a year. See [substitution profiles](SUBSTITUTIONS.md) for state-specific triggers, employer assumptions, confirmed Sarawak 2026 exceptions, provenance, imported replacement metadata and limitations. Statements above about missing substitute dates describe the base snapshots, not the derived application calendar.

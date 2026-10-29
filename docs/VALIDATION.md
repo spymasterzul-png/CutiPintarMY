@@ -49,3 +49,9 @@ The website now uses Bahasa Melayu for static copy, form labels, trip cards, spo
 ## 2027 dataset
 
 Added 50 merged holiday date/name records from BKPP JPM’s official 2027 PDF. All 52 source rows on pages 1–3 were visually reviewed and the state tick marks independently checked against the merged JSON. Five new tests cover validation/provenance, movable dates, merged coverage, state exceptions/two Israk dates, and 2027 planning/export boundaries. All 34 tests pass. Both years load independently; if a dataset fails, successfully loaded years remain usable. The latest available bundled year is selected by default.
+
+## Substitute holiday planning
+
+All 46 tests pass, including 12 new tests for Sunday/Friday/Saturday profiles, state/workweek independence, Wesak/Agong and Johor Raya chains, public versus employer overlaps, official rest-day validation, explicit Sarawak 2026 dates, imported replacements, idempotence, input immutability, zero-budget 2027 planning, provisional flags and year-boundary reporting. Derived dates are passed to the existing planner rather than subtracted as annual leave. State rules are estimates with the source and limitations shown in the interface.
+
+Local browser validation also confirmed the February 2026 Kuala Lumpur distinction: state mode shows 2 February once, whereas employer mode exposes an official-rest-day selector and shows 2 and 3 February. The browser console had no errors. JTKSM’s fixed-holiday priority is used for employer collision labels so Federal Territory Day is assigned before Thaipusam.

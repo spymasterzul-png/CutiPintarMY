@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#163f36">
   <meta name="description" content="Rancang cuti tahunan bersama cuti umum Malaysia. Pilih trip pendek, susun pelan sendiri dan eksport kalendar.">
   <title>CutiPintar MY — Cuti sikit, rehat lebih lama</title>
-  <link rel="stylesheet" href="style.css?v=73c9ab9a5e79">
+  <link rel="stylesheet" href="style.css?v=cf1ca08be91d">
 </head>
 <body>
 <a class="skip-link" href="#settings">Terus ke perancang</a>
@@ -46,9 +46,12 @@
       <label for="mode">Nak bercuti macam mana?</label><select id="mode"><option value="short">Pilih trip pendek sendiri</option><option value="long">Satu cuti panjang (bandingkan pilihan)</option></select>
       <div id="trip-controls" class="two"><div><label for="max-days">Tempoh maksimum</label><select id="max-days"><option value="3">3 hari</option><option value="4">4 hari</option><option value="5" selected>5 hari</option></select></div><div><label for="trip-month">Bulan mula trip</label><select id="trip-month"><option value="">Semua bulan</option></select></div></div>
       <label for="weekend">Hujung minggu kau</label><select id="weekend"><option value="0,6">Sabtu & Ahad</option><option value="5,6">Jumaat & Sabtu</option></select>
+      <label for="substitutions">Kiraan cuti gantian</label><select id="substitutions"><option value="state">Ikut aturan negeri (anggaran)</option><option value="employer">Ikut hari rehat majikan (andaian)</option><option value="none">Jadual asal sahaja</option></select>
+      <div id="rest-day-control" hidden><label for="rest-day">Hari rehat rasmi majikan</label><select id="rest-day"><option value="0">Ahad</option><option value="5">Jumaat</option><option value="6">Sabtu</option></select></div>
+      <p id="substitution-note" class="hint"></p><a id="substitution-source" class="rule-source" href="https://www.kabinet.gov.my/" target="_blank" rel="noopener">Rujukan aturan ↗</a>
       <label for="from">Mula cari dari</label><input id="from" type="date" value="2027-01-01" required>
       <button class="primary">Cari cadangan cuti <span aria-hidden="true">↗</span></button>
-      <p class="hint" id="plan-hint">Lihat trip 3–5 hari dan pilih ikut baki cuti kau. Pelan akan dikosongkan jika negeri, tahun, tarikh mula, hujung minggu atau tempoh trip ditukar.</p>
+      <p class="hint" id="plan-hint">Lihat trip 3–5 hari dan pilih ikut baki cuti kau. Perubahan negeri, tahun, tarikh, hujung minggu, tempoh atau kaedah gantian mengosongkan pelan.</p>
       <details class="data-import"><summary>Tambah data cuti sendiri <span aria-hidden="true">+</span></summary><p>Import JSON mengikut format data/2027.json. Data tahun tersebut akan diganti untuk sesi ini. Masukkan sekali cuti gantian yang sudah disahkan.</p><input id="import" type="file" accept=".json,application/json" aria-label="Import data cuti"><a href="data/2027.json" download>Muat turun contoh JSON ↓</a></details>
     </form>
     <section class="results" aria-live="polite" aria-label="Cadangan trip dan pelan kau">
@@ -56,9 +59,9 @@
       <p class="notice" id="status"></p><p id="error" role="alert"></p><div id="plan-summary"></div><div id="cards"></div>
     </section>
   </section>
-  <section class="reference"><div class="reference-icon" aria-hidden="true">✳</div><div><p class="eyebrow">SEMAK DULU, BARU RANCANG</p><h2>Tentang tarikh cuti ni.</h2><p>Ini jadual asas sahaja. Cuti gantian tidak dijana secara automatik. Semak pengumuman negeri dan kalendar majikan sebelum memohon cuti.</p><details><summary>Lihat senarai cuti umum & sumber rasmi</summary><ul id="holidays"></ul><a href="https://www.kabinet.gov.my/hari-kelepasan-am/" target="_blank" rel="noopener">Rujukan rasmi BKPP JPM ↗</a></details></div></section>
+  <section class="reference"><div class="reference-icon" aria-hidden="true">✳</div><div><p class="eyebrow">SEMAK DULU, BARU RANCANG</p><h2>Tentang tarikh cuti ni.</h2><p>Tarikh gantian dikira mengikut kaedah yang kau pilih dan dilabel sebagai anggaran atau disahkan. Jadual asas dan pengumuman tambahan mungkin belum lengkap. Semak kalendar negeri dan majikan sebelum memohon cuti.</p><details><summary>Lihat senarai cuti umum & sumber rasmi</summary><ul id="holidays"></ul><a href="https://www.kabinet.gov.my/hari-kelepasan-am/" target="_blank" rel="noopener">Rujukan rasmi BKPP JPM ↗</a></details></div></section>
 </main>
-<footer><a class="brand" href="./">✳ CutiPintar <small>MY</small></a><span>Lebih masa di luar pejabat. <span id="build-version">Versi 0773d5b7</span></span><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">Sumber terbuka. Banyak kemungkinan. ↗</a></footer>
-<script type="module" src="src/app.js?v=0773d5b72d39"></script>
+<footer><a class="brand" href="./">✳ CutiPintar <small>MY</small></a><span>Lebih masa di luar pejabat. <span id="build-version">Versi a07a6a33</span></span><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">Sumber terbuka. Banyak kemungkinan. ↗</a></footer>
+<script type="module" src="src/app.js?v=a07a6a33b93a"></script>
 </body>
 </html>

@@ -7,11 +7,19 @@ root = Path(__file__).resolve().parents[1]
 def revision(path):
     return hashlib.sha256((root / path).read_bytes()).hexdigest()[:12]
 
-app = root / 'src/app.js'
-source = app.read_text()
-for filename in ('states.js', 'planner.js', 'spotlight.js'):
-    source = re.sub(r"(?<=from )(['\"])\./" + re.escape(filename) + r"(?:\?v=[a-zA-Z0-9-]+)?\1", lambda m: m[1] + './' + filename + '?v=' + revision('src/' + filename) + m[1], source)
-app.write_text(source)
+# Dependency order ensures imported modules receive their own current revisions first.
+modules = ('states.js', 'planner.js', 'spotlight.js', 'observance.js', 'app.js')
+for module in modules:
+    target = root / 'src' / module
+    if not target.exists():
+        continue
+    source = target.read_text()
+    for filename in modules:
+        dependency = root / 'src' / filename
+        if filename == module or not dependency.exists():
+            continue
+        source = re.sub(r"(?<=from )(['\"])\./" + re.escape(filename) + r"(?:\?v=[a-zA-Z0-9-]+)?\1", lambda m: m[1] + './' + filename + '?v=' + revision('src/' + filename) + m[1], source)
+    target.write_text(source)
 html = root / 'index.html'
 source = html.read_text()
 for path in ('style.css', 'src/app.js'):

@@ -22,7 +22,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 - Default short-trip mode: browse 3–5-day alternatives and choose trips yourself with **Tambah ke pelan**. Filter by starting month and show 12 more options at a time.
 - The plan starts empty. Selected trips share one annual leave budget; overlapping or unaffordable trips cannot be added. Remove trips individually or clear the plan.
 - A summary shows total days off, leave used and leave remaining, with an export for selected trips. Lowering the budget retains selections but blocks plan export until the excess is resolved.
-- Changing state, year, search start, weekend or maximum trip length clears selections. Month filtering and switching planning modes retain them. All selections are session-only.
+- Changing state, year, search start, weekend, maximum trip length or substitution method clears selections. Month filtering and switching planning modes retain them. All selections are session-only.
 - Optional long-break mode: up to six non-overlapping alternatives, each using the full leave budget independently.
 - Each suggestion lists the dates and names of public holidays for the selected state, alongside annual leave dates and weekend days. Holidays that fall on a weekend appear in both lists.
 - Exact dates to apply for annual leave. Export `.ics` files containing **annual leave days only**, as tentative all-day events for Google Calendar, Outlook or Apple Calendar.
@@ -34,7 +34,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 ## MVP plan and architecture
 
 1. Current MVP: collect preferences → filter state holidays → identify non-working days → find continuous breaks → rank alternatives → export.
-2. Next: confirmed substitute holidays and amendments with evidence per record, and automated browser tests.
+2. Next: expanded state-rule verification and amendments with evidence per record, and automated browser tests.
 3. Implemented: manual short-trip selection sharing one annual leave budget. Later: saved preferences and a monthly calendar view.
 
 The website is in Bahasa Melayu; README, contribution guidelines, data documentation and test descriptions remain in English. UI text, date formatting, validation messages and calendar event summaries are Malay.
@@ -67,9 +67,9 @@ Including sorting, runtime is O(D² log D), where D ≤ 366. In long-break mode,
 
 ## Data status — please read
 
-The bundled 2026 and 2027 datasets are **base schedules**, not complete, current holiday calendars. Substitute holidays are not generated automatically. Special holidays, new announcements, overlapping celebrations and employer policies can change the results. BKPP has published additional 2026 notices and gazettes that are not yet incorporated in this snapshot.
+The bundled 2026 and 2027 datasets are **base schedules**, not complete, current holiday calendars. Substitute estimates are calculated according to the selected state profile or employer-rest-day assumption. Use base-only mode to disable automatic generation. Special holidays, new announcements, overlapping celebrations and employer policies can change the results. BKPP has published additional 2026 notices and gazettes that are not yet incorporated in this snapshot.
 
-Check official sources and your employer’s calendar, then import a reviewed dataset containing confirmed substitute dates. See [data sources and maintenance](docs/DATA.md). The 2027 dataset contains 50 merged date/name records, with source-page provenance and provisional flags for dates marked with an asterisk in the official schedule.
+State-rule substitution is enabled by default. Estimated dates are labelled and enter the planning calculations. Employer mode is a separate assumption requiring a chosen rest day and recognized holiday list. Verify official sources and your employer’s calendar; import a reviewed dataset for any confirmed exceptions. See [substitute rule profiles and limitations](docs/SUBSTITUTIONS.md). See [data sources and maintenance](docs/DATA.md). The 2027 dataset contains 50 merged date/name records, with source-page provenance and provisional flags for dates marked with an asterisk in the official schedule.
 
 ## Contributing and license
 
