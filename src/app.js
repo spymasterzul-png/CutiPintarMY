@@ -1,9 +1,10 @@
+import {spotlightIndex,tripPitch,spotlightBalance} from './spotlight.js?v=7d7c4a85ce72';
 import {states} from './states.js?v=e40164c504e7';
 import {validate,plan,tripOptions,selectionStatus,previewDays,calendar,next} from './planner.js?v=211118b56bc5';
 const $=id=>document.getElementById(id),datasets=new Map(),selected=new Map();
 const fmt=d=>new Intl.DateTimeFormat('en-MY',{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(d));
 const tripKey=r=>`${r.start}/${r.end}`;
-let searchContext='',visibleCount=12;
+let searchContext='',visibleCount=12,spotlightKey='',spotlightContext='';
 for(const [code,name] of Object.entries(states))$('state').add(new Option(name,code));
 $('state').value='SGR';
 for(let month=1;month<=12;month++)$('trip-month').add(new Option(new Intl.DateTimeFormat('en',{month:'long',timeZone:'UTC'}).format(new Date(Date.UTC(2026,month-1,1))),String(month).padStart(2,'0')));
@@ -29,18 +30,26 @@ function planSummary(budget,state,year){
 }
 function updatePreview(results,options,short){
  const selectedTrips=[...selected.values()];
- const picked=short?selectedTrips.filter(r=>!$('trip-month').value||r.start.slice(5,7)===$('trip-month').value).at(-1):null;
- const eligible=short?results.filter(r=>!selectionStatus(r,selectedTrips,options.budget)):results;
- const trip=picked||eligible.find(r=>r.leave.length>0)||eligible[0]||results[0];
+ const context=JSON.stringify([options.year,options.state,options.budget,options.from,options.weekend,options.maxDays,short,$('trip-month').value]);
+ if(context!==spotlightContext){spotlightKey='';spotlightContext=context;}
+ const index=spotlightIndex(results,spotlightKey),trip=results[index];
+ if(trip)spotlightKey=tripKey(trip);
+ $('spotlight-count').textContent=trip?`Trip ${index+1} of ${results.length}`:'No matching trips';
+ const previous=$('spotlight-prev'),nextButton=$('spotlight-next');
+ previous.disabled=index<=0;nextButton.disabled=index<0||index>=results.length-1;
+ const browse=offset=>{const target=results[index+offset];if(target){spotlightKey=tripKey(target);updatePreview(results,options,short);}};
+ previous.onclick=()=>browse(-1);nextButton.onclick=()=>browse(1);
  const button=$('preview-add');$('preview-days').replaceChildren();button.onclick=null;
  if(!trip){
-  $('preview-source').textContent='YOUR NEXT BREAK';$('preview-range').textContent='No matching trip yet.';
+  $('preview-source').textContent='TRIP SPOTLIGHT';$('spotlight-pitch').textContent='';$('spotlight-balance').textContent='';$('preview-range').textContent='No matching trip yet.';
   $('preview-context').textContent='Try another month, start date or leave budget.';
   $('preview-detail').textContent='Your preview will appear here once a trip matches your settings.';
   $('preview-leave').textContent='—';$('preview-total').textContent='—';button.textContent='No trip available';button.disabled=true;return;
  }
- const chosen=short&&selected.has(tripKey(trip));
- $('preview-source').textContent=chosen?'FROM YOUR TRIP PLAN':'SUGGESTED FROM YOUR SETTINGS';
+ const balance=spotlightBalance(trip,selectedTrips,options.budget),chosen=short&&balance.chosen;
+ $('spotlight-pitch').textContent=tripPitch(trip);
+ $('spotlight-balance').textContent=short?(balance.after<0?`Needs ${-balance.after} more leave days — adjust your plan or budget.`:chosen?`${balance.remaining} leave days remaining · this trip is already included.`:`After adding this trip: ${balance.after} leave days remaining.`):'Long-break alternatives use your full allowance independently.';
+ $('preview-source').textContent=chosen?'TRIP SPOTLIGHT · IN YOUR PLAN':'TRIP SPOTLIGHT';
  $('preview-range').textContent=`${fmt(trip.start)} — ${fmt(trip.end)}`;
  $('preview-context').textContent=`${states[options.state]} · ${options.year}${trip.total>7?` · First 7 of ${trip.total} days shown`:''}`;
  $('preview-leave').textContent=`${trip.leave.length} ${trip.leave.length===1?'day':'days'}`;
@@ -73,6 +82,7 @@ function updatePreview(results,options,short){
 }
 function resetPreview(){
  $('preview-days').replaceChildren();$('preview-range').textContent='Check your planner settings.';
+ $('spotlight-prev').disabled=true;$('spotlight-next').disabled=true;$('spotlight-count').textContent='Preview unavailable';$('spotlight-pitch').textContent='';$('spotlight-balance').textContent='';
  $('preview-context').textContent='A valid trip is needed for the preview.';$('preview-detail').textContent='';
  $('preview-leave').textContent='—';$('preview-total').textContent='—';$('preview-add').disabled=true;$('preview-add').textContent='Preview unavailable';
 }
@@ -124,5 +134,5 @@ $('settings').onsubmit=e=>{e.preventDefault();visibleCount=12;render();};
 $('state').onchange=()=>{$('weekend').value=['KDH','KTN','TRG'].includes($('state').value)?'5,6':'0,6';render();};
 $('weekend').onchange=render;$('from').onchange=render;
 $('year').onchange=()=>{$('from').value=`${$('year').value}-01-01`;render();};
-$('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>1_000_000)throw Error('File too large. The limit is 1 MB.');const data=validate(JSON.parse(await file.text()),states);datasets.set(data.year,data);selected.clear();searchContext='';if(![...$('year').options].some(o=>+o.value===data.year))$('year').add(new Option(data.year,data.year));$('year').value=data.year;$('from').value=`${data.year}-01-01`;render();}catch(err){$('error').textContent=err.message;}};
+$('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>1_000_000)throw Error('File too large. The limit is 1 MB.');const data=validate(JSON.parse(await file.text()),states);datasets.set(data.year,data);selected.clear();searchContext='';spotlightContext='';if(![...$('year').options].some(o=>+o.value===data.year))$('year').add(new Option(data.year,data.year));$('year').value=data.year;$('from').value=`${data.year}-01-01`;render();}catch(err){$('error').textContent=err.message;}};
 try{const response=await fetch('data/2026.json',{cache:'no-store'});if(!response.ok)throw Error('Could not load holiday data.');const data=validate(await response.json(),states);datasets.set(data.year,data);render();}catch(e){$('error').textContent=e.message+' Run a local server as described in the README.';resetPreview();}

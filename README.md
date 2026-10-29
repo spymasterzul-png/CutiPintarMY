@@ -27,6 +27,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 - Each suggestion lists the dates and names of public holidays for the selected state, alongside annual leave dates and weekend days. Holidays that fall on a weekend appear in both lists.
 - Exact dates to apply for annual leave. Export `.ics` files containing **annual leave days only**, as tentative all-day events for Google Calendar, Outlook or Apple Calendar.
 - Validated local JSON imports. Imported data lasts for the current browser session; refreshing restores the bundled dataset.
+- Trip Spotlight: previous/next arrows browse suggestions without changing your selected plan. A plain-language summary explains when to take leave, and the after-add balance shows the remaining allowance. Already-selected trips are never charged twice.
 - Interactive trip preview: real dates follow the selected state, year, month and workweek. Tap a day to see holiday names, weekend status or annual leave details. Add the suggested trip straight to your plan; the preview also reflects selected trips. Long-break previews show the first seven days and state the full duration.
 - English interface, documentation, validation messages and calendar exports. Malaysian place names and official holiday names are retained in their original form.
 

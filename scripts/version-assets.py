@@ -9,7 +9,7 @@ def revision(path):
 
 app = root / 'src/app.js'
 source = app.read_text()
-for filename in ('states.js', 'planner.js'):
+for filename in ('states.js', 'planner.js', 'spotlight.js'):
     source = re.sub(r"(?<=from )(['\"])\./" + re.escape(filename) + r"(?:\?v=[a-zA-Z0-9-]+)?\1", lambda m: m[1] + './' + filename + '?v=' + revision('src/' + filename) + m[1], source)
 app.write_text(source)
 html = root / 'index.html'

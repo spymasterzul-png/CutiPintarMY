@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#163f36">
   <meta name="description" content="Turn your Malaysian public holidays and annual leave into better getaways. Browse short trips, build your plan and export your calendar.">
   <title>CutiPintar MY — More time off, less annual leave</title>
-  <link rel="stylesheet" href="style.css?v=1b95df3b91ff">
+  <link rel="stylesheet" href="style.css?v=fe7739138827">
 </head>
 <body>
 <a class="skip-link" href="#settings">Skip to planner</a>
@@ -24,13 +24,16 @@
       <div class="pills"><span>✓ All 16 states & territories</span><span>✓ No sign-up</span><span>✓ Free & open source</span></div>
     </div>
     <section class="hero-art live-preview" aria-label="Live trip preview">
-      <div class="art-top"><span id="preview-source">YOUR NEXT BREAK</span><span aria-hidden="true">↗</span></div>
+      <div class="art-top"><span id="preview-source">TRIP SPOTLIGHT</span><span aria-hidden="true">↗</span></div>
+      <div class="spotlight-nav"><span id="spotlight-count" aria-live="polite">Finding your next escape…</span><div><button id="spotlight-prev" type="button" aria-label="Previous trip suggestion" disabled>←</button><button id="spotlight-next" type="button" aria-label="Next trip suggestion" disabled>→</button></div></div>
       <div class="art-copy" id="preview-range">Let’s find your<br><span>next little escape.</span></div>
       <p class="preview-context" id="preview-context">Loading holiday data…</p>
+      <p class="spotlight-pitch" id="spotlight-pitch"></p>
       <div class="week-strip" id="preview-days" aria-label="Days in this trip"></div>
       <div class="art-legend"><span><i class="legend-leave"></i> Annual leave</span><span><i class="legend-holiday"></i> Public holiday</span><span><i class="legend-weekend"></i> Weekend</span></div>
       <p class="preview-detail" id="preview-detail" aria-live="polite">Tap a date to see the details.</p>
       <div class="art-result"><div><strong id="preview-leave">—</strong><span>of annual leave</span></div><span class="art-arrow" aria-hidden="true">⟶</span><div><strong id="preview-total">—</strong><span>of time off</span></div></div>
+      <p class="spotlight-balance" id="spotlight-balance" aria-live="polite"></p>
       <button id="preview-add" class="preview-add" type="button" disabled>Loading trip preview…</button>
     </section>
   </section>
@@ -55,7 +58,7 @@
   </section>
   <section class="reference"><div class="reference-icon" aria-hidden="true">✳</div><div><p class="eyebrow">PLAN WITH CONFIDENCE</p><h2>A quick word about the dates.</h2><p>Base schedule only. Substitute holidays are not generated automatically. Check state announcements and your employer’s calendar before applying.</p><details><summary>Explore public holidays & official sources</summary><ul id="holidays"></ul><a href="https://www.kabinet.gov.my/hari-kelepasan-am/" target="_blank" rel="noopener">Official BKPP JPM reference ↗</a></details></div></section>
 </main>
-<footer><a class="brand" href="./">✳ CutiPintar <small>MY</small></a><span>Made for more out-of-office moments. <span id="build-version">Build cfe7a2a8</span></span><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">Open source. Open possibilities. ↗</a></footer>
-<script type="module" src="src/app.js?v=cfe7a2a881c3"></script>
+<footer><a class="brand" href="./">✳ CutiPintar <small>MY</small></a><span>Made for more out-of-office moments. <span id="build-version">Build 9bf4cba1</span></span><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">Open source. Open possibilities. ↗</a></footer>
+<script type="module" src="src/app.js?v=9bf4cba1d049"></script>
 </body>
 </html>

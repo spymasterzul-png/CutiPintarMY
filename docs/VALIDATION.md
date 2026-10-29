@@ -35,3 +35,9 @@ Browser smoke check: the default preview shows Selangor, 14–18 February 2026, 
 ## Cached frontend release fix
 
 Production diagnosis reproduced an old EXAMPLE illustration in the browser while the published HTML and successful Pages deployment already contained the live preview. Loading a fresh document showed the live-preview markup but an older application script, leaving its loading placeholders unchanged. Added content-based revisions to CSS, application entry and imported modules, a footer build identifier, and no-store holiday data fetches. All 26 existing tests pass and asset URL hashes were checked against their file contents.
+
+## Trip Spotlight
+
+All 29 tests pass. Three additional tests cover the active-trip cursor across result changes, plain-language leave summaries and after-add balances, including already-selected and unaffordable trips.
+
+Local browser check: next advances from 14–18 February to 1–4 January, previous returns to February, and neither action selects a trip. Adding February keeps the spotlight on the same dates and reports 2 leave days remaining with the trip already included. The add button is disabled to prevent duplicate charging.
