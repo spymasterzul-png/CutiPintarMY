@@ -1,5 +1,5 @@
-import {states} from './states.js';
-import {validate,plan,tripOptions,selectionStatus,previewDays,calendar,next} from './planner.js';
+import {states} from './states.js?v=e40164c504e7';
+import {validate,plan,tripOptions,selectionStatus,previewDays,calendar,next} from './planner.js?v=211118b56bc5';
 const $=id=>document.getElementById(id),datasets=new Map(),selected=new Map();
 const fmt=d=>new Intl.DateTimeFormat('en-MY',{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(d));
 const tripKey=r=>`${r.start}/${r.end}`;
@@ -125,4 +125,4 @@ $('state').onchange=()=>{$('weekend').value=['KDH','KTN','TRG'].includes($('stat
 $('weekend').onchange=render;$('from').onchange=render;
 $('year').onchange=()=>{$('from').value=`${$('year').value}-01-01`;render();};
 $('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>1_000_000)throw Error('File too large. The limit is 1 MB.');const data=validate(JSON.parse(await file.text()),states);datasets.set(data.year,data);selected.clear();searchContext='';if(![...$('year').options].some(o=>+o.value===data.year))$('year').add(new Option(data.year,data.year));$('year').value=data.year;$('from').value=`${data.year}-01-01`;render();}catch(err){$('error').textContent=err.message;}};
-try{const response=await fetch('data/2026.json');if(!response.ok)throw Error('Could not load holiday data.');const data=validate(await response.json(),states);datasets.set(data.year,data);render();}catch(e){$('error').textContent=e.message+' Run a local server as described in the README.';resetPreview();}
+try{const response=await fetch('data/2026.json',{cache:'no-store'});if(!response.ok)throw Error('Could not load holiday data.');const data=validate(await response.json(),states);datasets.set(data.year,data);render();}catch(e){$('error').textContent=e.message+' Run a local server as described in the README.';resetPreview();}

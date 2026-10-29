@@ -31,3 +31,7 @@ All 22 planning/selection tests still pass. Desktop browser smoke check confirms
 All 26 tests pass, including 4 preview tests for real dates, leave classification, state holiday names, multiple holidays on a weekend, Friday–Saturday weekends, year boundaries, empty results and the seven-day display limit.
 
 Browser smoke check: the default preview shows Selangor, 14–18 February 2026, 1 annual leave day and 5 days off. Clicking 17 February shows Tahun Baharu Cina. Adding the trip changes the source label to FROM YOUR TRIP PLAN, disables the add button, and updates the shared-budget plan. A screenshot was saved. The preview uses the bundled base schedule and does not add missing substitute dates.
+
+## Cached frontend release fix
+
+Production diagnosis reproduced an old EXAMPLE illustration in the browser while the published HTML and successful Pages deployment already contained the live preview. Loading a fresh document showed the live-preview markup but an older application script, leaving its loading placeholders unchanged. Added content-based revisions to CSS, application entry and imported modules, a footer build identifier, and no-store holiday data fetches. All 26 existing tests pass and asset URL hashes were checked against their file contents.

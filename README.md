@@ -72,3 +72,9 @@ Check official sources and your employer’s calendar, then import a reviewed da
 See [CONTRIBUTING.md](CONTRIBUTING.md). Code is licensed under MIT. Holiday facts are transcribed from government sources with attribution; government PDFs and logos are not reproduced. This is an independent project, not an official government service.
 
 Repository: https://github.com/spymasterzul-png/CutiPintarMY
+
+## Publishing frontend updates
+
+After editing frontend files, run `python3 scripts/version-assets.py` and commit the updated files. This adds content-based revisions to CSS, the entry script and its module imports, preventing a new HTML page from loading an older cached script. Holiday JSON is fetched without reusing the browser cache. The footer shows the loaded build identifier.
+
+If an already-open tab still displays the old illustration, reopen the site with a new `?v=` query or perform a hard refresh to reload the HTML document.
