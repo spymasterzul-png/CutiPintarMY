@@ -59,3 +59,30 @@ export function planTrips({year,holidays,state,budget,weekend=[0,6],from=`${year
  }
  const result=solve(0,budget,maxTrips);return {...result,remaining:budget-result.used};
 }
+
+export function tripOptions({year,holidays,state,budget,weekend=[0,6],from=`${year}-01-01`,maxDays=5}) {
+ if(!Number.isInteger(budget)||budget<0||budget>60)throw Error('Leave budget must be a whole number from 0 to 60.');
+ if(!Number.isInteger(maxDays)||maxDays<3||maxDays>5)throw Error('Choose a maximum trip length of 3–5 days.');
+ const off=new Set(holidays.filter(h=>h.states.includes(state)).map(h=>h.date)),days=[];
+ for(let d=`${year}-01-01`;d<=`${year}-12-31`;d=next(d))if(d>=from)days.push({date:d,free:off.has(d)||weekend.includes(new Date(d).getUTCDay())});
+ const results=[];
+ for(let i=0;i<days.length;i++){
+  const leave=[];
+  for(let j=i;j<days.length&&j-i<maxDays;j++){
+   if(!days[j].free)leave.push(days[j].date);
+   if(leave.length>budget)break;
+   const total=j-i+1;
+   if(total>=3&&leave.length<total)results.push({start:days[i].date,end:days[j].date,total,leave:[...leave]});
+  }
+ }
+ return results.sort((a,b)=>{
+  const efficiency=r=>r.leave.length?r.total/r.leave.length:Infinity;
+  const ea=efficiency(a),eb=efficiency(b);
+  return (ea===eb?0:ea>eb?-1:1)||b.total-a.total||a.leave.length-b.leave.length||a.start.localeCompare(b.start);
+ });
+}
+export function selectionStatus(trip,selected,budget){
+ if(selected.some(r=>r.start<=trip.end&&r.end>=trip.start))return 'Overlaps a selected trip';
+ if(selected.reduce((sum,r)=>sum+r.leave.length,0)+trip.leave.length>budget)return 'Not enough leave remaining';
+ return '';
+}

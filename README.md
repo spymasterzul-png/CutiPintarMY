@@ -19,8 +19,10 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 - All 13 states and 3 federal territories, with the base 2026 holiday schedule included.
 - Select from loaded years. Import JSON to add another year; dates for unsupported years are never guessed.
 - A leave budget of 0–60 days, a search start date, and a Saturday–Sunday or Friday–Saturday weekend to match your work schedule.
-- Default short-trip mode: trips of 3–5 days sharing one annual leave budget, with a configurable maximum of 2, 3, 4 or 6 trips. Choose a maximum trip length of 3, 4 or 5 days. At least one actual working day separates trips.
-- A summary shows total days off, leave used and leave remaining, with an export for all trips.
+- Default short-trip mode: browse 3–5-day alternatives and choose trips yourself with **Add to my plan**. Filter by starting month and show 12 more options at a time.
+- The plan starts empty. Selected trips share one annual leave budget; overlapping or unaffordable trips cannot be added. Remove trips individually or clear the plan.
+- A summary shows total days off, leave used and leave remaining, with an export for selected trips. Lowering the budget retains selections but blocks plan export until the excess is resolved.
+- Changing state, year, search start, weekend or maximum trip length clears selections. Month filtering and switching planning modes retain them. All selections are session-only.
 - Optional long-break mode: up to six non-overlapping alternatives, each using the full leave budget independently.
 - Each suggestion lists the dates and names of public holidays for the selected state, alongside annual leave dates and weekend days. Holidays that fall on a weekend appear in both lists.
 - Exact dates to apply for annual leave. Export `.ics` files containing **annual leave days only**, as tentative all-day events for Google Calendar, Outlook or Apple Calendar.
@@ -31,7 +33,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 
 1. Current MVP: collect preferences → filter state holidays → identify non-working days → find continuous breaks → rank alternatives → export.
 2. Next: a reviewed 2027 dataset, confirmed substitute holidays and amendments with evidence per record, and automated browser tests.
-3. Implemented: multiple short trips sharing one annual leave budget using dynamic programming. Later: saved preferences and a monthly calendar view.
+3. Implemented: manual short-trip selection sharing one annual leave budget. Later: saved preferences and a monthly calendar view.
 
 The app is a static frontend using ES modules. Pure planning functions live in `src/planner.js`; versioned holiday data lives in `data/`. No backend is needed. Host the repository root on GitHub Pages or any static server. Google Fonts are optional; system fonts provide a fallback.
 
@@ -48,7 +50,9 @@ docs/DATA.md                Sources, limitations and maintenance
 
 ## How planning works
 
-**Short trips:** dynamic programming chooses a set of 3–5-day trips within one shared budget and the selected trip-count limit. It maximizes total days off, then minimizes annual leave used, then prefers fewer trips. At least one working day must separate trips, preventing artificial splits of a continuous break. Up to five candidate lengths are considered per date; the date/budget/trip-count states take O(D × B × T × L) time, with bounded trip-list copies (T ≤ 6). Free trips count toward the trip limit. The planner may leave some budget unused.
+**Choose your own short trips:** enumerate 3-day intervals up to the selected maximum (3–5 days), within the year and leave allowance. Exclude intervals consisting entirely of working days. Rank by days off per leave day, then longer breaks, fewer leave days and earlier dates. Zero-leave trips appear first. Enumeration takes O(D × L), followed by sorting; D ≤ 366 and L ≤ 5. Overlapping intervals remain visible as alternatives. Each addition checks date overlap and the cumulative leave cost. Adjacent trips can be selected, but overlapping dates cannot. No automatic selection is made.
+
+The earlier automatic shared-budget planner remains available as the tested `planTrips` helper, but the interface now uses manual selection.
 
 **Long break:**
 
