@@ -20,6 +20,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 - Select from loaded years. Import JSON to add another year; dates for unsupported years are never guessed.
 - A leave budget of 0–60 days, a search start date, and a Saturday–Sunday or Friday–Saturday weekend to match your work schedule.
 - Up to six non-overlapping alternatives, each using the full leave budget independently.
+- Each suggestion lists the dates and names of public holidays for the selected state, alongside annual leave dates and weekend days. Holidays that fall on a weekend appear in both lists.
 - Exact dates to apply for annual leave. Export `.ics` files containing **annual leave days only**, as tentative all-day events for Google Calendar, Outlook or Apple Calendar.
 - Validated local JSON imports. Imported data lasts for the current browser session; refreshing restores the bundled dataset.
 - English interface, documentation, validation messages and calendar exports. Malaysian place names and official holiday names are retained in their original form.

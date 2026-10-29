@@ -1,5 +1,5 @@
 import {states} from './states.js';
-import {validate,plan,calendar} from './planner.js';
+import {validate,plan,calendar,next} from './planner.js';
 const $=id=>document.getElementById(id), datasets=new Map();
 const fmt=d=>new Intl.DateTimeFormat('en-MY',{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(d));
 for(const [code,name] of Object.entries(states)) $('state').add(new Option(name,code));
@@ -15,8 +15,18 @@ function render(){
   if(!results.length)$('cards').textContent='No breaks found in this range. Try an earlier start date or increase your leave budget.';
   results.forEach((r,i)=>{
    const card=document.createElement('article');card.className='card';
-   card.innerHTML=`<span class="tag">${i===0?'★ Longest break':'Alternative option'}</span><h3>${fmt(r.start)} — ${fmt(r.end)}</h3><div class="metrics"><div><strong>${r.leave.length}</strong> <span>leave days</span></div><span class="arrow">→</span><div><strong>${r.total}</strong> <span>days off</span></div></div><p></p><button class="export">Export annual leave .ics ↓</button>`;
+   card.innerHTML=`<span class="tag">${i===0?'★ Longest break':'Alternative option'}</span><h3>${fmt(r.start)} — ${fmt(r.end)}</h3><div class="metrics"><div><strong>${r.leave.length}</strong> <span>leave days</span></div><span class="arrow">→</span><div><strong>${r.total}</strong> <span>days off</span></div></div><p class="leave-dates"></p><section class="break-holidays"><h4>Public holidays in this break</h4><ul></ul></section><p class="weekend-dates"></p><button class="export">Export annual leave .ics ↓</button>`;
    card.querySelector('p').textContent=r.leave.length?'Apply for leave: '+r.leave.map(fmt).join(', '):'No annual leave needed for this break.';
+   const list=card.querySelector('.break-holidays ul');
+   const holidays=data.holidays.filter(h=>h.states.includes(state)&&h.date>=r.start&&h.date<=r.end).sort((a,b)=>a.date.localeCompare(b.date)||a.name.localeCompare(b.name));
+   if(holidays.length) {
+    holidays.forEach(h=>{const li=document.createElement('li');li.textContent=`${fmt(h.date)} — ${h.name}`;list.append(li);});
+   } else {
+    const li=document.createElement('li');li.textContent='No public holidays in this break.';list.append(li);
+   }
+   const weekend=$('weekend').value.split(',').map(Number),weekendDates=[];
+   for(let d=r.start;d<=r.end;d=next(d)) if(weekend.includes(new Date(d).getUTCDay()))weekendDates.push(fmt(d));
+   card.querySelector('.weekend-dates').textContent=weekendDates.length?'Weekend days: '+weekendDates.join(', '):'No weekend days in this break.';
    const button=card.querySelector('button');button.disabled=!r.leave.length;
    button.onclick=()=>{const url=URL.createObjectURL(new Blob([calendar(r,state)],{type:'text/calendar;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`cutipintar-${state}-${r.start}.ics`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
    $('cards').append(card);
