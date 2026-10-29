@@ -15,7 +15,11 @@ function planSummary(budget,state,year){
  const trips=[...selected.values()].sort((a,b)=>a.start.localeCompare(b.start)),used=trips.reduce((n,r)=>n+r.leave.length,0),total=trips.reduce((n,r)=>n+r.total,0);
  const box=$('plan-summary');box.replaceChildren();
  const heading=document.createElement('h3');heading.textContent='My trip plan';box.append(heading);
- const summary=document.createElement('p');summary.className='trip-summary';summary.textContent=`${trips.length} ${trips.length===1?'trip':'trips'} selected · ${total} days off · ${used} / ${budget} leave days used · ${budget-used} remaining`;box.append(summary);
+ const summary=document.createElement('div');summary.className='trip-summary';
+ for(const [value,label,kind] of [[trips.length,'trips selected',''],[total,'days off',''],[`${used} / ${budget}`,'leave days used',''],[budget-used,'days remaining','remaining']]){
+  const stat=document.createElement('div');stat.className=kind;const number=document.createElement('strong'),caption=document.createElement('span');number.textContent=value;caption.textContent=label;stat.append(number,caption);summary.append(stat);
+ }
+ box.append(summary);
  if(used>budget){const warning=document.createElement('p');warning.className='budget-warning';warning.textContent='Your selected trips exceed the new budget. Remove a trip or increase your leave allowance.';box.append(warning);}
  if(!trips.length){const hint=document.createElement('p');hint.textContent='Nothing selected yet. Browse the options below and add the trips you like.';box.append(hint);return;}
  const list=document.createElement('ul');list.className='selected-trips';
