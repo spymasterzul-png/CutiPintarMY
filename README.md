@@ -19,7 +19,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 - All 13 states and 3 federal territories, with the base 2026 holiday schedule included.
 - Select from loaded years. Import JSON to add another year; dates for unsupported years are never guessed.
 - A leave budget of 0–60 days, a search start date, and a Saturday–Sunday or Friday–Saturday weekend to match your work schedule.
-- Default short-trip mode: browse 3–5-day alternatives and choose trips yourself with **Add to my plan**. Filter by starting month and show 12 more options at a time.
+- Default short-trip mode: browse 3–5-day alternatives and choose trips yourself with **Tambah ke pelan**. Filter by starting month and show 12 more options at a time.
 - The plan starts empty. Selected trips share one annual leave budget; overlapping or unaffordable trips cannot be added. Remove trips individually or clear the plan.
 - A summary shows total days off, leave used and leave remaining, with an export for selected trips. Lowering the budget retains selections but blocks plan export until the excess is resolved.
 - Changing state, year, search start, weekend or maximum trip length clears selections. Month filtering and switching planning modes retain them. All selections are session-only.
@@ -29,7 +29,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 - Validated local JSON imports. Imported data lasts for the current browser session; refreshing restores the bundled dataset.
 - Trip Spotlight: previous/next arrows browse suggestions without changing your selected plan. A plain-language summary explains when to take leave, and the after-add balance shows the remaining allowance. Already-selected trips are never charged twice.
 - Interactive trip preview: real dates follow the selected state, year, month and workweek. Tap a day to see holiday names, weekend status or annual leave details. Add the suggested trip straight to your plan; the preview also reflects selected trips. Long-break previews show the first seven days and state the full duration.
-- English interface, documentation, validation messages and calendar exports. Malaysian place names and official holiday names are retained in their original form.
+- Malay interface, validation messages and calendar exports, with English repository documentation. Malaysian place names and official holiday names are retained.
 
 ## MVP plan and architecture
 
@@ -37,10 +37,12 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 2. Next: a reviewed 2027 dataset, confirmed substitute holidays and amendments with evidence per record, and automated browser tests.
 3. Implemented: manual short-trip selection sharing one annual leave budget. Later: saved preferences and a monthly calendar view.
 
+The website is in Bahasa Melayu; README, contribution guidelines, data documentation and test descriptions remain in English. UI text, date formatting, validation messages and calendar event summaries are Malay.
+
 The app is a static frontend using ES modules. Pure planning functions live in `src/planner.js`; versioned holiday data lives in `data/`. No backend is needed. Host the repository root on GitHub Pages or any static server. Google Fonts are optional; system fonts provide a fallback.
 
 ```text
-index.html / style.css      Responsive English interface
+index.html / style.css      Responsive Malay interface
 src/app.js                  UI interactions, imports and downloads
 src/planner.js              Planning logic and ICS export
 src/states.js               Malaysian state codes and names

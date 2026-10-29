@@ -7,10 +7,10 @@ export function spotlightIndex(trips,key){
  return paid>=0?paid:0;
 }
 export function tripPitch(trip){
- const weekday=date=>new Intl.DateTimeFormat('en',{weekday:'long',timeZone:'UTC'}).format(new Date(date));
- const specific=date=>new Intl.DateTimeFormat('en',{weekday:'long',day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(date));
- const leave=trip.leave.length===0?'No annual leave needed':trip.leave.length===1?`Take ${specific(trip.leave[0])} off`:`Use ${trip.leave.length} days of annual leave`;
- return `${leave} → enjoy ${weekday(trip.start)} to ${weekday(trip.end)} (${trip.total} days).`;
+ const weekday=date=>new Intl.DateTimeFormat('ms-MY',{weekday:'long',timeZone:'UTC'}).format(new Date(date));
+ const specific=date=>new Intl.DateTimeFormat('ms-MY',{weekday:'long',day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(date));
+ const leave=trip.leave.length===0?'Tak perlu guna cuti tahunan':trip.leave.length===1?`Ambil cuti pada ${specific(trip.leave[0])}`:`Guna ${trip.leave.length} hari cuti tahunan`;
+ return `${leave} → rehat dari ${weekday(trip.start)} hingga ${weekday(trip.end)} (${trip.total} hari).`;
 }
 export function spotlightBalance(trip,selected,budget){
  const remaining=budget-selected.reduce((sum,t)=>sum+t.leave.length,0);

@@ -1,64 +1,64 @@
 <!doctype html>
-<html lang="en">
+<html lang="ms">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#163f36">
-  <meta name="description" content="Turn your Malaysian public holidays and annual leave into better getaways. Browse short trips, build your plan and export your calendar.">
-  <title>CutiPintar MY — More time off, less annual leave</title>
-  <link rel="stylesheet" href="style.css?v=fe7739138827">
+  <meta name="description" content="Rancang cuti tahunan bersama cuti umum Malaysia. Pilih trip pendek, susun pelan sendiri dan eksport kalendar.">
+  <title>CutiPintar MY — Cuti sikit, rehat lebih lama</title>
+  <link rel="stylesheet" href="style.css?v=73c9ab9a5e79">
 </head>
 <body>
-<a class="skip-link" href="#settings">Skip to planner</a>
+<a class="skip-link" href="#settings">Terus ke perancang</a>
 <header>
   <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">✳</span> CutiPintar <small>MY</small></a>
-  <nav aria-label="Main navigation"><a href="#planner">The planner</a><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></nav>
+  <nav aria-label="Navigasi utama"><a href="#planner">Perancang cuti</a><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></nav>
 </header>
 <main>
   <section class="hero">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> LESS LEAVE. MORE MALAYSIA.</p>
-      <h1>Your next break.<br><em>Closer than you think.</em></h1>
-      <p class="hero-description">A little annual leave can go a long way. Find the sweet spots between public holidays and weekends, and make more room for life.</p>
-      <a class="hero-cta" href="#planner">Find my next getaway <span aria-hidden="true">↗</span></a>
-      <div class="pills"><span>✓ All 16 states & territories</span><span>✓ No sign-up</span><span>✓ Free & open source</span></div>
+      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> CUTI SIKIT. JALAN LEBIH JAUH.</p>
+      <h1>Masa untuk berehat.<br><em>Tak perlu tunggu lama.</em></h1>
+      <p class="hero-description">Baki cuti sikit pun boleh jadi percutian best. Gabungkan cuti tahunan, cuti umum dan hujung minggu—lebih masa untuk diri sendiri.</p>
+      <a class="hero-cta" href="#planner">Cari peluang bercuti <span aria-hidden="true">↗</span></a>
+      <div class="pills"><span>✓ Semua 16 negeri & wilayah</span><span>✓ Tanpa daftar akaun</span><span>✓ Percuma & sumber terbuka</span></div>
     </div>
-    <section class="hero-art live-preview" aria-label="Live trip preview">
-      <div class="art-top"><span id="preview-source">TRIP SPOTLIGHT</span><span aria-hidden="true">↗</span></div>
-      <div class="spotlight-nav"><span id="spotlight-count" aria-live="polite">Finding your next escape…</span><div><button id="spotlight-prev" type="button" aria-label="Previous trip suggestion" disabled>←</button><button id="spotlight-next" type="button" aria-label="Next trip suggestion" disabled>→</button></div></div>
-      <div class="art-copy" id="preview-range">Let’s find your<br><span>next little escape.</span></div>
-      <p class="preview-context" id="preview-context">Loading holiday data…</p>
+    <section class="hero-art live-preview" aria-label="Pratonton trip sebenar">
+      <div class="art-top"><span id="preview-source">SOROTAN CUTI</span><span aria-hidden="true">↗</span></div>
+      <div class="spotlight-nav"><span id="spotlight-count" aria-live="polite">Sedang mencari peluang bercuti…</span><div><button id="spotlight-prev" type="button" aria-label="Cadangan trip sebelumnya" disabled>←</button><button id="spotlight-next" type="button" aria-label="Cadangan trip seterusnya" disabled>→</button></div></div>
+      <div class="art-copy" id="preview-range">Jom cari peluang<br><span>untuk berehat.</span></div>
+      <p class="preview-context" id="preview-context">Sedang memuatkan data cuti…</p>
       <p class="spotlight-pitch" id="spotlight-pitch"></p>
-      <div class="week-strip" id="preview-days" aria-label="Days in this trip"></div>
-      <div class="art-legend"><span><i class="legend-leave"></i> Annual leave</span><span><i class="legend-holiday"></i> Public holiday</span><span><i class="legend-weekend"></i> Weekend</span></div>
-      <p class="preview-detail" id="preview-detail" aria-live="polite">Tap a date to see the details.</p>
-      <div class="art-result"><div><strong id="preview-leave">—</strong><span>of annual leave</span></div><span class="art-arrow" aria-hidden="true">⟶</span><div><strong id="preview-total">—</strong><span>of time off</span></div></div>
+      <div class="week-strip" id="preview-days" aria-label="Hari dalam trip ini"></div>
+      <div class="art-legend"><span><i class="legend-leave"></i> Cuti tahunan</span><span><i class="legend-holiday"></i> Cuti umum</span><span><i class="legend-weekend"></i> Hujung minggu</span></div>
+      <p class="preview-detail" id="preview-detail" aria-live="polite">Tekan tarikh untuk lihat butiran.</p>
+      <div class="art-result"><div><strong id="preview-leave">—</strong><span>cuti tahunan</span></div><span class="art-arrow" aria-hidden="true">⟶</span><div><strong id="preview-total">—</strong><span>untuk berehat</span></div></div>
       <p class="spotlight-balance" id="spotlight-balance" aria-live="polite"></p>
-      <button id="preview-add" class="preview-add" type="button" disabled>Loading trip preview…</button>
+      <button id="preview-add" class="preview-add" type="button" disabled>Sedang memuatkan cadangan…</button>
     </section>
   </section>
-  <section class="planner-intro" id="planner"><div><p class="eyebrow">YOUR TIME, BETTER SPENT</p><h2>Let’s put a break on the calendar.</h2></div><p>Choose your dates. Build your own escape.</p></section>
+  <section class="planner-intro" id="planner"><div><p class="eyebrow">LEBIH MASA UNTUK DIRI SENDIRI</p><h2>Jom tandakan tarikh untuk berehat.</h2></div><p>Pilih tarikh. Susun percutian sendiri.</p></section>
   <section class="workspace">
     <form id="settings">
-      <div class="form-title"><span class="step-mark">01</span><div><h2>Make it yours</h2><p>A few details. Plenty of possibilities.</p></div></div>
-      <label for="state">Where do you work?</label><select id="state"></select>
-      <div class="two"><div><label for="year">Year</label><select id="year"><option>2026</option></select></div><div><label for="budget">Annual leave days</label><input id="budget" type="number" min="0" max="60" value="3" required></div></div>
-      <label for="mode">How do you like to unwind?</label><select id="mode"><option value="short">Choose my own short trips</option><option value="long">One long break (compare alternatives)</option></select>
-      <div id="trip-controls" class="two"><div><label for="max-days">Trip length, up to</label><select id="max-days"><option value="3">3 days</option><option value="4">4 days</option><option value="5" selected>5 days</option></select></div><div><label for="trip-month">Starts in</label><select id="trip-month"><option value="">Any month</option></select></div></div>
-      <label for="weekend">Your weekend</label><select id="weekend"><option value="0,6">Saturday & Sunday</option><option value="5,6">Friday & Saturday</option></select>
-      <label for="from">Start looking from</label><input id="from" type="date" value="2026-01-01" required>
-      <button class="primary">Find my breaks <span aria-hidden="true">↗</span></button>
-      <p class="hint" id="plan-hint">Browse 3–5 day trips and add your favourites to one shared leave budget. Changing state, year, start date, weekend or trip length clears your plan.</p>
-      <details class="data-import"><summary>Bring your own holiday data <span aria-hidden="true">+</span></summary><p>Import JSON using the data/2026.json format. The file replaces that year’s data for this session. Include any confirmed substitute holidays.</p><input id="import" type="file" accept=".json,application/json" aria-label="Import holiday data"><a href="data/2026.json" download>Download sample JSON ↓</a></details>
+      <div class="form-title"><span class="step-mark">01</span><div><h2>Ikut cara kau</h2><p>Isi sikit, nampak banyak peluang.</p></div></div>
+      <label for="state">Negeri tempat bekerja</label><select id="state"></select>
+      <div class="two"><div><label for="year">Tahun</label><select id="year"><option>2026</option></select></div><div><label for="budget">Baki cuti tahunan</label><input id="budget" type="number" min="0" max="60" value="3" required></div></div>
+      <label for="mode">Nak bercuti macam mana?</label><select id="mode"><option value="short">Pilih trip pendek sendiri</option><option value="long">Satu cuti panjang (bandingkan pilihan)</option></select>
+      <div id="trip-controls" class="two"><div><label for="max-days">Tempoh maksimum</label><select id="max-days"><option value="3">3 hari</option><option value="4">4 hari</option><option value="5" selected>5 hari</option></select></div><div><label for="trip-month">Bulan mula trip</label><select id="trip-month"><option value="">Semua bulan</option></select></div></div>
+      <label for="weekend">Hujung minggu kau</label><select id="weekend"><option value="0,6">Sabtu & Ahad</option><option value="5,6">Jumaat & Sabtu</option></select>
+      <label for="from">Mula cari dari</label><input id="from" type="date" value="2026-01-01" required>
+      <button class="primary">Cari cadangan cuti <span aria-hidden="true">↗</span></button>
+      <p class="hint" id="plan-hint">Lihat trip 3–5 hari dan pilih ikut baki cuti kau. Pelan akan dikosongkan jika negeri, tahun, tarikh mula, hujung minggu atau tempoh trip ditukar.</p>
+      <details class="data-import"><summary>Tambah data cuti sendiri <span aria-hidden="true">+</span></summary><p>Import JSON mengikut format data/2026.json. Data tahun tersebut akan diganti untuk sesi ini. Masukkan sekali cuti gantian yang sudah disahkan.</p><input id="import" type="file" accept=".json,application/json" aria-label="Import data cuti"><a href="data/2026.json" download>Muat turun contoh JSON ↓</a></details>
     </form>
-    <section class="results" aria-live="polite" aria-label="Trip suggestions and your plan">
-      <div class="result-head"><div><p class="eyebrow">02 / THE GOOD PART</p><h2>A little inspiration for your next escape.</h2></div><span id="context"></span></div>
+    <section class="results" aria-live="polite" aria-label="Cadangan trip dan pelan kau">
+      <div class="result-head"><div><p class="eyebrow">02 / JOM PILIH TRIP</p><h2>Peluang bercuti yang berbaloi.</h2></div><span id="context"></span></div>
       <p class="notice" id="status"></p><p id="error" role="alert"></p><div id="plan-summary"></div><div id="cards"></div>
     </section>
   </section>
-  <section class="reference"><div class="reference-icon" aria-hidden="true">✳</div><div><p class="eyebrow">PLAN WITH CONFIDENCE</p><h2>A quick word about the dates.</h2><p>Base schedule only. Substitute holidays are not generated automatically. Check state announcements and your employer’s calendar before applying.</p><details><summary>Explore public holidays & official sources</summary><ul id="holidays"></ul><a href="https://www.kabinet.gov.my/hari-kelepasan-am/" target="_blank" rel="noopener">Official BKPP JPM reference ↗</a></details></div></section>
+  <section class="reference"><div class="reference-icon" aria-hidden="true">✳</div><div><p class="eyebrow">SEMAK DULU, BARU RANCANG</p><h2>Tentang tarikh cuti ni.</h2><p>Ini jadual asas sahaja. Cuti gantian tidak dijana secara automatik. Semak pengumuman negeri dan kalendar majikan sebelum memohon cuti.</p><details><summary>Lihat senarai cuti umum & sumber rasmi</summary><ul id="holidays"></ul><a href="https://www.kabinet.gov.my/hari-kelepasan-am/" target="_blank" rel="noopener">Rujukan rasmi BKPP JPM ↗</a></details></div></section>
 </main>
-<footer><a class="brand" href="./">✳ CutiPintar <small>MY</small></a><span>Made for more out-of-office moments. <span id="build-version">Build 9bf4cba1</span></span><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">Open source. Open possibilities. ↗</a></footer>
-<script type="module" src="src/app.js?v=9bf4cba1d049"></script>
+<footer><a class="brand" href="./">✳ CutiPintar <small>MY</small></a><span>Lebih masa di luar pejabat. <span id="build-version">Versi cd876888</span></span><a href="https://github.com/spymasterzul-png/CutiPintarMY" target="_blank" rel="noopener">Sumber terbuka. Banyak kemungkinan. ↗</a></footer>
+<script type="module" src="src/app.js?v=cd8768883fef"></script>
 </body>
 </html>

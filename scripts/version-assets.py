@@ -16,6 +16,6 @@ html = root / 'index.html'
 source = html.read_text()
 for path in ('style.css', 'src/app.js'):
     source = re.sub(r'((?:src|href)=\")' + re.escape(path) + r'(?:\?v=[a-zA-Z0-9-]+)?\"', lambda m: m[1] + path + '?v=' + revision(path) + '"', source)
-source = re.sub(r'(<span id="build-version">).*?(</span>)', lambda m: m[1] + 'Build ' + revision('src/app.js')[:8] + m[2], source)
+source = re.sub(r'(<span id="build-version">).*?(</span>)', lambda m: m[1] + 'Versi ' + revision('src/app.js')[:8] + m[2], source)
 html.write_text(source)
 print('Asset revisions updated: ' + revision('src/app.js')[:8])

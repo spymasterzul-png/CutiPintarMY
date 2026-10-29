@@ -41,3 +41,7 @@ Production diagnosis reproduced an old EXAMPLE illustration in the browser while
 All 29 tests pass. Three additional tests cover the active-trip cursor across result changes, plain-language leave summaries and after-add balances, including already-selected and unaffordable trips.
 
 Local browser check: next advances from 14–18 February to 1–4 January, previous returns to February, and neither action selects a trip. Adding February keeps the spotlight on the same dates and reports 2 leave days remaining with the trip already included. The add button is disabled to prevent duplicate charging.
+
+## Malay website, English repository documentation
+
+The website now uses Bahasa Melayu for static copy, form labels, trip cards, spotlight navigation and summaries, error messages, accessibility labels, date/month/weekday formatting, base-data status and calendar event summaries. README, contribution guidance, data documentation, source comments and test descriptions remain English. The tests that inspect user-facing strings now assert the Malay output; planning rules are unchanged. All 29 tests pass.
