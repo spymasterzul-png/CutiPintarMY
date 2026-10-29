@@ -25,3 +25,9 @@ Browser smoke check: the plan starts empty; 12 of 724 Selangor options are displ
 The interface now uses a forest-green, cream and lime palette, an illustrative leave-to-break hero, a two-column desktop card layout, a numeric plan summary, focus indicators, a skip link and reduced-motion support. Responsive rules provide a single-column mobile layout. The hero illustration is labelled as an example, not holiday data.
 
 All 22 planning/selection tests still pass. Desktop browser smoke check confirms data loading, adding the February trip, remaining leave and disabled overlapping choices. The desktop layout was visually inspected and a preview saved. Mobile responsive styles were implemented but were not separately verified at a phone viewport in this pass.
+
+## Interactive trip preview
+
+All 26 tests pass, including 4 preview tests for real dates, leave classification, state holiday names, multiple holidays on a weekend, Friday–Saturday weekends, year boundaries, empty results and the seven-day display limit.
+
+Browser smoke check: the default preview shows Selangor, 14–18 February 2026, 1 annual leave day and 5 days off. Clicking 17 February shows Tahun Baharu Cina. Adding the trip changes the source label to FROM YOUR TRIP PLAN, disables the add button, and updates the shared-budget plan. A screenshot was saved. The preview uses the bundled base schedule and does not add missing substitute dates.

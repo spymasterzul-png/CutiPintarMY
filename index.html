@@ -23,13 +23,16 @@
       <a class="hero-cta" href="#planner">Find my next getaway <span aria-hidden="true">↗</span></a>
       <div class="pills"><span>✓ All 16 states & territories</span><span>✓ No sign-up</span><span>✓ Free & open source</span></div>
     </div>
-    <div class="hero-art" aria-label="Illustration: combine one annual leave day, one public holiday and a weekend for a four-day break. This is an example, not a holiday schedule.">
-      <div class="art-top"><span>THE LONG-WEEKEND EFFECT</span><span aria-hidden="true">↗</span></div>
-      <div class="art-copy">Small plans.<br><span>Big breathing room.</span></div>
-      <div class="week-strip" aria-hidden="true"><div><span>MON</span><b>·</b></div><div><span>TUE</span><b>·</b></div><div><span>WED</span><b>·</b></div><div class="day-leave"><span>THU</span><b>↗</b></div><div class="day-holiday"><span>FRI</span><b>✳</b></div><div class="day-weekend"><span>SAT</span><b>☀</b></div><div class="day-weekend"><span>SUN</span><b>☀</b></div></div>
-      <div class="art-legend" aria-hidden="true"><span><i class="legend-leave"></i> Annual leave</span><span><i class="legend-holiday"></i> Public holiday</span><span><i class="legend-weekend"></i> Weekend</span></div>
-      <div class="art-result"><div><strong>1 day</strong><span>of annual leave</span></div><span class="art-arrow" aria-hidden="true">⟶</span><div><strong>4 days</strong><span>of possibilities</span></div><span class="example-tag">EXAMPLE</span></div>
-    </div>
+    <section class="hero-art live-preview" aria-label="Live trip preview">
+      <div class="art-top"><span id="preview-source">YOUR NEXT BREAK</span><span aria-hidden="true">↗</span></div>
+      <div class="art-copy" id="preview-range">Let’s find your<br><span>next little escape.</span></div>
+      <p class="preview-context" id="preview-context">Loading holiday data…</p>
+      <div class="week-strip" id="preview-days" aria-label="Days in this trip"></div>
+      <div class="art-legend"><span><i class="legend-leave"></i> Annual leave</span><span><i class="legend-holiday"></i> Public holiday</span><span><i class="legend-weekend"></i> Weekend</span></div>
+      <p class="preview-detail" id="preview-detail" aria-live="polite">Tap a date to see the details.</p>
+      <div class="art-result"><div><strong id="preview-leave">—</strong><span>of annual leave</span></div><span class="art-arrow" aria-hidden="true">⟶</span><div><strong id="preview-total">—</strong><span>of time off</span></div></div>
+      <button id="preview-add" class="preview-add" type="button" disabled>Loading trip preview…</button>
+    </section>
   </section>
   <section class="planner-intro" id="planner"><div><p class="eyebrow">YOUR TIME, BETTER SPENT</p><h2>Let’s put a break on the calendar.</h2></div><p>Choose your dates. Build your own escape.</p></section>
   <section class="workspace">

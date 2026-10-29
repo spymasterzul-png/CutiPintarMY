@@ -86,3 +86,14 @@ export function selectionStatus(trip,selected,budget){
  if(selected.reduce((sum,r)=>sum+r.leave.length,0)+trip.leave.length>budget)return 'Not enough leave remaining';
  return '';
 }
+
+export function previewDays(trip,holidays,state,weekend=[0,6],limit=7){
+ if(!trip)return [];
+ const leave=new Set(trip.leave),days=[];
+ for(let date=trip.start;date<=trip.end&&days.length<limit;date=next(date)){
+  const names=holidays.filter(h=>h.date===date&&h.states.includes(state)).map(h=>h.name);
+  const isWeekend=weekend.includes(new Date(date).getUTCDay());
+  days.push({date,names,isWeekend,kind:names.length?'holiday':leave.has(date)?'leave':isWeekend?'weekend':'work'});
+ }
+ return days;
+}
