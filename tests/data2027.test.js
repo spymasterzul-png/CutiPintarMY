@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {validate,tripOptions,calendar} from '../src/planner.js';
+import {states} from '../src/states.js';
+const data=JSON.parse(await readFile(new URL('../data/2027.json',import.meta.url)));
+const find=(date,name)=>data.holidays.find(h=>h.date===date&&h.name===name);
+test('2027 base data is valid, attributed, distinct and covers all 16 states',()=>{validate(data,states);assert.equal(data.holidays.length,50);assert.equal(new Set(data.holidays.map(h=>h.date+'/'+h.name)).size,50);for(const s of Object.keys(states))assert.ok(data.holidays.some(h=>h.states.includes(s)));for(const h of data.holidays){assert.ok(h.date.startsWith('2027-'));assert.equal(h.source,data.source);assert.ok([1,2,3].includes(h.sourcePage));}});
+test('2027 movable holiday dates come from the new schedule',()=>{assert.ok(find('2027-02-06','Tahun Baharu Cina'));assert.ok(find('2027-03-10','Hari Raya Puasa').provisional);assert.ok(find('2027-05-17','Hari Raya Qurban'));assert.ok(find('2027-05-20','Hari Wesak'));assert.ok(find('2027-10-28','Deepavali').provisional);assert.ok(!find('2027-03-21','Hari Raya Puasa'));});
+test('Chinese New Year day two merges federal and state coverage once',()=>{assert.equal(find('2027-02-07','Tahun Baharu Cina (Hari Kedua)').states.length,16);});
+test('state exceptions and both Israk dates retained',()=>{assert.ok(!find('2027-10-28','Deepavali').states.includes('SWK'));assert.deepEqual(find('2027-05-18','Hari Raya Qurban (Hari Kedua)').states,['KDH','KTN','PLS','TRG']);for(const date of ['2027-01-06','2027-12-26'])assert.deepEqual(find(date,'Israk dan Mikraj').states,['KDH','NSN','PLS','TRG']);assert.ok(find('2027-07-30','Hari Keputeraan Sultan Pahang'));assert.ok(find('2027-11-05','Hari Keputeraan Sultan Perak'));});
+test('2027 planning and export never use 2026 dates',()=>{const trips=tripOptions({year:2027,holidays:data.holidays,state:'SGR',budget:3});assert.ok(trips.length>12);for(const t of trips){assert.ok(t.start.startsWith('2027-'));assert.ok(t.end.startsWith('2027-'));}const paid=trips.find(t=>t.leave.length);assert.match(calendar(paid,'SGR'),/DTSTART;VALUE=DATE:2027/);});

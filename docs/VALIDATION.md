@@ -45,3 +45,7 @@ Local browser check: next advances from 14–18 February to 1–4 January, previ
 ## Malay website, English repository documentation
 
 The website now uses Bahasa Melayu for static copy, form labels, trip cards, spotlight navigation and summaries, error messages, accessibility labels, date/month/weekday formatting, base-data status and calendar event summaries. README, contribution guidance, data documentation, source comments and test descriptions remain English. The tests that inspect user-facing strings now assert the Malay output; planning rules are unchanged. All 29 tests pass.
+
+## 2027 dataset
+
+Added 50 merged holiday date/name records from BKPP JPM’s official 2027 PDF. All 52 source rows on pages 1–3 were visually reviewed and the state tick marks independently checked against the merged JSON. Five new tests cover validation/provenance, movable dates, merged coverage, state exceptions/two Israk dates, and 2027 planning/export boundaries. All 34 tests pass. Both years load independently; if a dataset fails, successfully loaded years remain usable. The latest available bundled year is selected by default.

@@ -1,6 +1,6 @@
 import {spotlightIndex,tripPitch,spotlightBalance} from './spotlight.js?v=72f4bbf5e70b';
 import {states} from './states.js?v=e40164c504e7';
-import {validate,plan,tripOptions,selectionStatus,previewDays,calendar,next} from './planner.js?v=b82efc1427f8';
+import {validate,plan,tripOptions,selectionStatus,previewDays,calendar,next} from './planner.js?v=c8e4c866452f';
 const $=id=>document.getElementById(id),datasets=new Map(),selected=new Map();
 const fmt=d=>new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(d));
 const tripKey=r=>`${r.start}/${r.end}`;
@@ -107,7 +107,7 @@ function render(){
    card.innerHTML=`<span class="tag">${short?(chosen?'✓ Dalam pelan kau':'Pilihan trip'):i===0?'★ Rehat paling panjang':'Pilihan alternatif'}</span><h3>${fmt(r.start)} — ${fmt(r.end)}</h3><div class="metrics"><div><strong>${r.leave.length}</strong> <span>hari cuti</span></div><span class="arrow">→</span><div><strong>${r.total}</strong> <span>hari rehat</span></div></div><p class="leave-dates"></p><section class="break-holidays"><h4>Cuti umum dalam trip ini</h4><ul></ul></section><p class="weekend-dates"></p><div class="card-actions"></div>`;
    card.querySelector('.leave-dates').textContent=r.leave.length?'Mohon cuti: '+r.leave.map(fmt).join(', '):'Tak perlu guna cuti tahunan untuk trip ini.';
    const list=card.querySelector('.break-holidays ul'),holidays=data.holidays.filter(h=>h.states.includes(state)&&h.date>=r.start&&h.date<=r.end).sort((a,b)=>a.date.localeCompare(b.date)||a.name.localeCompare(b.name));
-   for(const h of holidays){const li=document.createElement('li');li.textContent=`${fmt(h.date)} — ${h.name}`;list.append(li);}
+   for(const h of holidays){const li=document.createElement('li');li.textContent=`${fmt(h.date)} — ${h.name}${h.provisional?' *':''}`;list.append(li);}
    if(!holidays.length){const li=document.createElement('li');li.textContent='Tiada cuti umum dalam trip ini.';list.append(li);}
    const weekendDates=[];for(let d=r.start;d<=r.end;d=next(d))if(options.weekend.includes(new Date(d).getUTCDay()))weekendDates.push(fmt(d));
    card.querySelector('.weekend-dates').textContent=weekendDates.length?'Hujung minggu: '+weekendDates.join(', '):'Tiada hujung minggu dalam trip ini.';
@@ -120,7 +120,7 @@ function render(){
    const button=document.createElement('button');button.type='button';button.className='export';button.textContent='Eksport cuti tahunan .ics ↓';button.disabled=!r.leave.length;button.onclick=()=>download(r,state,`cutipintar-${state}-${r.start}.ics`);actions.append(button);$('cards').append(card);
   });
   if(short&&results.length>visibleCount){const more=document.createElement('button');more.type='button';more.className='show-more';more.textContent='Lihat lagi pilihan trip';more.onclick=()=>{visibleCount+=12;render();};$('cards').append(more);}
-  $('holidays').replaceChildren();data.holidays.filter(h=>h.states.includes(state)).sort((a,b)=>a.date.localeCompare(b.date)).forEach(h=>{const li=document.createElement('li');li.textContent=`${fmt(h.date)} — ${h.name}`;$('holidays').append(li);});
+  $('holidays').replaceChildren();data.holidays.filter(h=>h.states.includes(state)).sort((a,b)=>a.date.localeCompare(b.date)).forEach(h=>{const li=document.createElement('li');li.textContent=`${fmt(h.date)} — ${h.name}${h.provisional?' *':''}`;$('holidays').append(li);});
  }catch(e){$('error').textContent=e.message;$('cards').replaceChildren();$('plan-summary').replaceChildren();resetPreview();}
 }
 function updateMode(){
@@ -135,4 +135,17 @@ $('state').onchange=()=>{$('weekend').value=['KDH','KTN','TRG'].includes($('stat
 $('weekend').onchange=render;$('from').onchange=render;
 $('year').onchange=()=>{$('from').value=`${$('year').value}-01-01`;render();};
 $('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>1_000_000)throw Error('Fail terlalu besar. Hadnya 1 MB.');const data=validate(JSON.parse(await file.text()),states);datasets.set(data.year,data);selected.clear();searchContext='';spotlightContext='';if(![...$('year').options].some(o=>+o.value===data.year))$('year').add(new Option(data.year,data.year));$('year').value=data.year;$('from').value=`${data.year}-01-01`;render();}catch(err){$('error').textContent=err instanceof SyntaxError?'Fail JSON tidak sah. Semak format fail dan cuba lagi.':err.message;}};
-try{const response=await fetch('data/2026.json',{cache:'no-store'});if(!response.ok)throw Error('Data cuti gagal dimuatkan.');const data=validate(await response.json(),states);datasets.set(data.year,data);render();}catch(e){$('error').textContent=e.message+' Jalankan pelayan tempatan seperti dalam README.';resetPreview();}
+try{
+ const loaded=await Promise.allSettled([2026,2027].map(async year=>{
+  const response=await fetch(`data/${year}.json`,{cache:'no-store'});
+  if(!response.ok)throw Error(`Data cuti ${year} gagal dimuatkan.`);
+  const data=validate(await response.json(),states);
+  if(data.year!==year)throw Error('Tahun dalam fail data tidak sepadan.');
+  return data;
+ }));
+ for(const item of loaded)if(item.status==='fulfilled')datasets.set(item.value.year,item.value);
+ if(!datasets.size)throw Error('Data cuti gagal dimuatkan.');
+ $('year').replaceChildren();for(const year of [...datasets.keys()].sort())$('year').add(new Option(year,year));
+ const latest=Math.max(...datasets.keys());$('year').value=latest;$('from').value=`${latest}-01-01`;render();
+ if(loaded.some(item=>item.status==='rejected'))$('error').textContent='Sebahagian data tahun gagal dimuatkan. Tahun yang tersedia masih boleh digunakan; muat semula untuk cuba lagi.';
+}catch(e){$('error').textContent=e.message+' Jalankan pelayan tempatan seperti dalam README.';resetPreview();}

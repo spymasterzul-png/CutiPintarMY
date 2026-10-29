@@ -1,5 +1,15 @@
 # Holiday data
 
+## 2027 official base schedule
+
+Source: [BKPP JPM 2027 schedule](https://www.kabinet.gov.my/storage/2026/08/HKA_2027.pdf), linked from the official public-holiday index. Reviewed 29 October 2026. `data/2027.json` includes 50 unique date/name records across all 16 state/territory codes. Federal/state rows for the second day of Chinese New Year and Qurban are merged by date and name. Each record includes a source URL and source page; dates marked with an asterisk retain `provisional: true`.
+
+Pages 1–3 were rendered and visually inspected. An independent comparison of coloured state tick marks in all 52 source rows against the 50 merged records confirmed every state scope. The two Israk dan Mikraj dates, 6 January and 26 December, are separate records. Pahang’s birthday is 30 July and Perak’s is 5 November in the 2027 schedule.
+
+This is the published base schedule only. No substitute dates are inferred and no later special-holiday announcements are claimed to be included. Lunar dates remain subject to official confirmation.
+
+## 2026 base schedule
+
 Primary source: [BKPP JPM 2026 schedule](https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf), pages 1–3. Source review metadata: 29 October 2026. This snapshot preserves the base schedule; that date does not certify that every amendment has been incorporated. Official holiday names are retained in their original form.
 
 ## Update sources

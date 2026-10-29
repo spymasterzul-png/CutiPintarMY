@@ -16,7 +16,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 
 ## Features
 
-- All 13 states and 3 federal territories, with the base 2026 holiday schedule included.
+- All 13 states and 3 federal territories, with the official base schedules for 2026 and 2027 included. The latest successfully loaded year is selected by default.
 - Select from loaded years. Import JSON to add another year; dates for unsupported years are never guessed.
 - A leave budget of 0–60 days, a search start date, and a Saturday–Sunday or Friday–Saturday weekend to match your work schedule.
 - Default short-trip mode: browse 3–5-day alternatives and choose trips yourself with **Tambah ke pelan**. Filter by starting month and show 12 more options at a time.
@@ -34,7 +34,7 @@ Alternatively, use `npm run dev` and `npm test`. No package installation is requ
 ## MVP plan and architecture
 
 1. Current MVP: collect preferences → filter state holidays → identify non-working days → find continuous breaks → rank alternatives → export.
-2. Next: a reviewed 2027 dataset, confirmed substitute holidays and amendments with evidence per record, and automated browser tests.
+2. Next: confirmed substitute holidays and amendments with evidence per record, and automated browser tests.
 3. Implemented: manual short-trip selection sharing one annual leave budget. Later: saved preferences and a monthly calendar view.
 
 The website is in Bahasa Melayu; README, contribution guidelines, data documentation and test descriptions remain in English. UI text, date formatting, validation messages and calendar event summaries are Malay.
@@ -46,8 +46,9 @@ index.html / style.css      Responsive Malay interface
 src/app.js                  UI interactions, imports and downloads
 src/planner.js              Planning logic and ICS export
 src/states.js               Malaysian state codes and names
-data/2026.json              Official base-schedule snapshot
-tests/planner.test.js       Built-in Node tests
+data/2026.json              Official 2026 base-schedule snapshot
+data/2027.json              Official 2027 base schedule with source provenance
+tests/*.test.js             Built-in Node tests
 docs/DATA.md                Sources, limitations and maintenance
 .github/workflows/test.yml  Automated tests on GitHub
 ```
@@ -66,9 +67,9 @@ Including sorting, runtime is O(D² log D), where D ≤ 366. In long-break mode,
 
 ## Data status — please read
 
-The bundled 2026 dataset is a **base schedule**, not a complete, current holiday calendar. Substitute holidays are not generated automatically. Special holidays, new announcements, overlapping celebrations and employer policies can change the results. BKPP has published additional 2026 notices and gazettes that are not yet incorporated in this snapshot.
+The bundled 2026 and 2027 datasets are **base schedules**, not complete, current holiday calendars. Substitute holidays are not generated automatically. Special holidays, new announcements, overlapping celebrations and employer policies can change the results. BKPP has published additional 2026 notices and gazettes that are not yet incorporated in this snapshot.
 
-Check official sources and your employer’s calendar, then import a reviewed dataset containing confirmed substitute dates. See [data sources and maintenance](docs/DATA.md).
+Check official sources and your employer’s calendar, then import a reviewed dataset containing confirmed substitute dates. See [data sources and maintenance](docs/DATA.md). The 2027 dataset contains 50 merged date/name records, with source-page provenance and provisional flags for dates marked with an asterisk in the official schedule.
 
 ## Contributing and license
 
